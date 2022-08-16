@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ConvertMoneyController {
+
     @Autowired
-    IConvertService convertService;
+    private IConvertService convertService;
 
     @GetMapping("/")
     public String home() {
