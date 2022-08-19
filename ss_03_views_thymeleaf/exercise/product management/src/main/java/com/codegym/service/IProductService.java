@@ -5,7 +5,8 @@ import com.codegym.model.Product;
 import java.util.List;
 
 public interface IProductService {
-    List<Product> findAll();
+
+    List<Product> findAll(String name);
 
     void save(Product product);
 
@@ -15,5 +16,4 @@ public interface IProductService {
 
     void remove(int id);
 
-    List<Product> findByName(String name);
 }

@@ -14,8 +14,8 @@ public class ProductServiceImpl implements IProductService {
     IProductRepository productRepository;
 
     @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<Product> findAll(String name) {
+        return productRepository.findAll(name);
     }
 
     @Override
@@ -38,8 +38,4 @@ public class ProductServiceImpl implements IProductService {
         productRepository.remove(id);
     }
 
-    @Override
-    public List<Product> findByName(String name) {
-        return productRepository.findByName(name);
-    }
 }
