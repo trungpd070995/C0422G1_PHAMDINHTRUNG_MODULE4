@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+<body>
+<div id="form">
+    <form th:action="@{/music/save}" th:object="${music}"
+          method="post" novalidate="novalidate">
+        <input type="hidden" th:field="*{idTheSong}">
+        <div>
+            <label>Tên bài hát</label>
+            <input type="text" th:field="*{nameOfTheSong}">
+        </div>
+
+        <div>
+            <label>Nghệ sĩ thể hiện</label>
+            <input type="email" th:field="*{performingArtist}"/>
+        </div>
+
+        <div>
+            <label>Thể loại nhạc</label>
+            <input type="text" th:field="*{kindOfMusic}"/>
+        </div>
+
+        <div>
+            <label>Đường dẫn file bài hát</label>
+            <input type="text" th:field="*{songFilePath}"/>
+        </div>
+        <div>
+            <a th:href="@{/music}"><input type="button" value="Back"/></a>
+            <input type="submit" value="Save"/>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
