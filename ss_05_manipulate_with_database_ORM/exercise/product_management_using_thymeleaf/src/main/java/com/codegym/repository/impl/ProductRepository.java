@@ -30,8 +30,9 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> findAllSearch(String name) {
-        String queryStr = "SELECT p FROM Product AS p";
+        String queryStr = "SELECT p FROM Product AS p where p.name like : name" ;
         TypedQuery<Product> query = BaseRepository.entityManager.createQuery(queryStr, Product.class);
+        query.setParameter("name", '%' + name + '%');
         return query.getResultList();
     }
 
@@ -45,8 +46,9 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public void remove(int id) {
-        String queryStr = "DELETE FROM Product WHERE id = :id";
-        TypedQuery<Product> query = BaseRepository.entityManager.createQuery(queryStr, Product.class);
-        query.setParameter("id", id);
+        EntityTransaction entityTransaction = BaseRepository.entityManager.getTransaction();
+        entityTransaction.begin();
+        BaseRepository.entityManager.remove(findById(id));
+        entityTransaction.commit();
     }
 }

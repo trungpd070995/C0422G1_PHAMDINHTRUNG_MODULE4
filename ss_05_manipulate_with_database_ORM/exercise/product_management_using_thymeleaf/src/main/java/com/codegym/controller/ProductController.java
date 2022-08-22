@@ -29,7 +29,6 @@ public class ProductController {
 
     @PostMapping("/save")
     public String save(Product product, RedirectAttributes redirectAttributes) {
-        product.setId((int) (Math.random() * 1000));
         productService.save(product);
         redirectAttributes.addFlashAttribute("success", "Add product successfully!");
         return "redirect:/product";

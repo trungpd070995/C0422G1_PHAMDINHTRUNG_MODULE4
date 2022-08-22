@@ -29,7 +29,6 @@ public class MusicController {
 
     @PostMapping("/save")
     public String save(Music music, RedirectAttributes redirectAttributes) {
-        music.setIdTheSong((int) (Math.random() * 1000));
         musicService.save(music);
         redirectAttributes.addFlashAttribute("success", "Add product successfully!");
         return "redirect:/music";
