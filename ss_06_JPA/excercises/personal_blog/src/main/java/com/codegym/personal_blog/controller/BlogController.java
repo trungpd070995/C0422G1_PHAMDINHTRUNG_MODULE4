@@ -53,9 +53,8 @@ public class BlogController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam int deleteId , RedirectAttributes redirectAttributes) {
+    public String delete(@RequestParam int deleteId) {
         iBlogService.remove(deleteId);
-//        redirectAttributes.addFlashAttribute("blog",)
         return "redirect:";
     }
 }

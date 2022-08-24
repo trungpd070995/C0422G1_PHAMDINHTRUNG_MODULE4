@@ -39,16 +39,14 @@
                 <td th:text="${blog.getName()}"></td>
                 <td th:text="${blog.getTopic()}"></td>
                 <td th:text="${blog.getStatus()}"></td>
+
                 <td>
                     <a th:href="@{/edit/{id} (id=${blog.getId()})}" class="btn btn-success">
                         Edit
                     </a>
                 </td>
+
                 <td>
-<!--                    <a th:href="@{/delete/{id} (id=${blog.getId()})}" class="btn btn-danger">-->
-<!--                        Delete-->
-<!--                    </a>-->
-                    <!-- Button trigger modal -->
                     <button  type="button" class="btn btn-primary" data-bs-toggle="modal"
                              data-bs-target="#exampleModal"
                              th:attr="onclick=|objDelete('${blog.id}', '${blog.name}')|">
@@ -61,6 +59,7 @@
                         View
                     </a>
                 </td>
+
             </tr>
         </table>
     </div>
