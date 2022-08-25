@@ -15,37 +15,51 @@
 </head>
 <body>
 <div class="container">
-    <div class="row w-100 mx-auto">
+
+    <div class="row">
+        <h2 align="center">ADD NEW USER </h2>
+    </div>
+
+    <div class="row w-50 mx-auto">
         <form th:action="@{/save}" th:object="${userDto}" method="POST" novalidate="novalidate">
             <table class="table table-primary table-striped">
                 <input type="hidden" th:field="*{id}"/>
-                <div>
-                    <label>First name</label>
-                    <input type="text" th:field="*{firstName}"/>
-                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-                </div>
-                <div>
-                    <label>Last name</label>
-                    <input type="text" th:field="*{lastName}"/>
-                    <span  th:errors="*{lastName}">Last name error</span>
-                </div>
-                <div>
-                    <label>Phone</label>
-                    <input type="text" th:field="*{phone}"/>
-                    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone error</span>
-                </div>
-                <div>
-                    <label>Age</label>
-                    <input type="text" th:field="*{age}"/>
-                    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</span>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input type="text" th:field="*{email}"/>
-                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</span>
-                </div>
-                <a th:href="@{/user}"><input type="button" value="Back"></a>
-                <input type="submit" value="Save"/>
+                <tr>
+                    <td>First name</td>
+                    <td><input class="form-control" type="text" th:field="*{firstName}"/></td>
+                    <td><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></td>
+                </tr>
+                <tr>
+                    <td>Last name</td>
+                    <td><input class="form-control" type="text" th:field="*{lastName}"/></td>
+                    <td><span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input class="form-control" type="text" th:field="*{phone}"/></td>
+                    <td><span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span></td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td><input class="form-control" type="text" th:field="*{age}"/></td>
+                    <td><span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input class="form-control" type="text" th:field="*{email}"/></td>
+                    <td><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <a th:href="@{/user}">
+                            <input type="button" class="btn btn-outline-success" value="Back">
+                        </a>
+                    </td>
+                    <td>
+                        <input type="submit" class="btn btn-outline-success" value="Save"/>
+                    </td>
+                </tr>
             </table>
         </form>
     </div>

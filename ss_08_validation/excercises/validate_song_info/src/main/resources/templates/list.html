@@ -7,7 +7,12 @@
 </head>
 <body>
 <div class="container">
-    <button type="button" class="btn btn-outline-info mt-5">
+
+    <div class="row mt-3">
+        <h2 align="center">LIST NEW SONG </h2>
+    </div>
+
+    <button type="button" class="btn btn-outline-info mt-2">
         <a th:href="@{/create}">
             Add new song
         </a>
@@ -27,7 +32,7 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.artist}"></td>
                 <td th:text="${item.type}"></td>
-                <td><a th:href="@{/edit/{id}(id = ${item.id})}">Edit</a></td>
+                <td><a th:href="@{/edit/{id}(id = ${item.id})}" class="btn btn-success">Edit</a></td>
             </tr>
         </table>
     </div>

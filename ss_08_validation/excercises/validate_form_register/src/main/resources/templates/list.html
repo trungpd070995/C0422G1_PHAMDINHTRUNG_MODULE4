@@ -8,13 +8,17 @@
 <body>
 <div class="container">
 
-        <button type="button" class="btn btn-outline-info mt-5">
-            <a th:href="@{/create}">
-                Add new user
-            </a>
-        </button>
+    <div class="row mt-4">
+        <h2 align="center">LIST NEW USER </h2>
+    </div>
 
-        <p th:text="${message}" style="color: green"></p>
+    <button type="button" class="btn btn-outline-info mt-2">
+        <a th:href="@{/create}">
+            Add new user
+        </a>
+    </button>
+
+    <p th:text="${message}" style="color: green"></p>
 
     <div class="row mt-4" align="center">
         <table class="table table-primary table-striped">
