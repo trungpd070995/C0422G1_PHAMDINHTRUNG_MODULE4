@@ -11,14 +11,13 @@
 <div id="form">
     <form th:action="@{/product/save}" th:object="${product}"
           method="POST" novalidate="novalidate">
-        <input type="hidden" th:field="*{id}"/>
         <div>
             <label>Name</label>
             <input type="text" th:field="*{name}"/>
         </div>
         <div>
             <label>Produce</label>
-            <input type="email" th:field="*{produce}"/>
+            <input type="text" th:field="*{produce}"/>
         </div>
         <div>
             <label>Quantity</label>

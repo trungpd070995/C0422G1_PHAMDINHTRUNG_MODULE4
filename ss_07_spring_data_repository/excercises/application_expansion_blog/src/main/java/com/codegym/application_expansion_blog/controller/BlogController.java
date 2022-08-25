@@ -86,7 +86,7 @@ public class BlogController {
 
     @PostMapping("/search")
     public String search(@PageableDefault(size = 5) Pageable pageable, @RequestParam("keyword") String keyword, Model model) {
-        Page<Blog> blogList = iBlogService.find(keyword, pageable);
+        Page<Blog> blogList = iBlogService.findKeywordByName(keyword, pageable);
         List<Category> categoryList = iCategoryService.findAll();
 
         model.addAttribute("blogList", blogList);

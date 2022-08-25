@@ -8,5 +8,6 @@ import vn.codegym.product_management.model.Product;
 
 @Transactional
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    Page<Product> findAllByNameContainsOrProduceContains(String name, String produce, Pageable pageInfo);
+
+    Page<Product> findAllByNameContainsAndProduceContains(String name, String produce, Pageable pageable);
 }

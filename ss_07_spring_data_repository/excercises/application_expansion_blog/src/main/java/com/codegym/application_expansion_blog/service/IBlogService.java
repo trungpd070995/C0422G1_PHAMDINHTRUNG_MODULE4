@@ -16,6 +16,6 @@ public interface IBlogService {
 
     void remove(Integer id);
 
-    Page<Blog> find(String keyword, Pageable pageable);
+    Page<Blog> findKeywordByName(String keyword, Pageable pageable);
 
 }

@@ -39,7 +39,7 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public Page<Blog> find(String keyword, Pageable pageable) {
+    public Page<Blog> findKeywordByName(String keyword, Pageable pageable) {
         return iBlogRepository.findAllByNameContains(keyword,pageable);
     }
 

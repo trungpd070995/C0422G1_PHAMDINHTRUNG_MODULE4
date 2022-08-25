@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.product_management.model.Product;
 import vn.codegym.product_management.service.ProductService;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -18,8 +20,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("")
-    public String index(@PageableDefault(size = 3) Pageable pageable, Model model) {
-        Page<Product> products = productService.findAll(pageable);
+    public String index(@PageableDefault(size = 3) Pageable pageable, Model model,
+                        @RequestParam Optional<String> keyword,@RequestParam Optional<String> produce) {
+
+        String keywordVal = keyword.orElse("");
+        String produceVal = produce.orElse("");
+        Page<Product> products = productService.search(keywordVal,produceVal,pageable);
         model.addAttribute("products", products);
         return "/index";
     }
@@ -33,7 +39,6 @@ public class ProductController {
     @PostMapping("/save")
     public String save(Product product, RedirectAttributes redirectAttributes) {
         productService.save(product);
-
         redirectAttributes.addFlashAttribute("success", "Add product successful!");
 
         return "redirect:/product";
@@ -75,10 +80,4 @@ public class ProductController {
         return "/view";
     }
 
-    @PostMapping("/search")
-    public String search(@PageableDefault(size = 3) Pageable pageable, @RequestParam("keyword") String keyword, Model model) {
-        Page<Product> products = productService.search(keyword, pageable);
-        model.addAttribute("products", products);
-        return "/index";
-    }
 }

@@ -15,5 +15,5 @@ public interface ProductService {
 
     void remove(int id);
 
-    Page<Product> search(String keyword, Pageable pageInfo);
+    Page<Product> search(String keyword,String produce, Pageable pageInfo);
 }

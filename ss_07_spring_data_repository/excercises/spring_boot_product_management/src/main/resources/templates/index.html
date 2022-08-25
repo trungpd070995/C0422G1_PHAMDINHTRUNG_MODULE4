@@ -17,9 +17,10 @@
     </div>
 </div>
 <div>
-    <form th:action="@{/product/search}" method="POST" novalidate="novalidate">
+    <form th:action="@{/product}" method="get" novalidate="novalidate">
         <label>Search</label>
         <input type="text" name="keyword">
+        <input type="text" name="produce">
         <input type="submit" value="Search"/>
     </form>
 </div>
