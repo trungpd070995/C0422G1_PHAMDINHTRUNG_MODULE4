@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="~{/layout::header}"></div>
+<p>
+    <a th:href="">
+        Back to employee list
+    </a>
+</p>
+<div id="form">
+    <form th:action="" th:object=""
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field=""/>
+        <div>
+            <label>Employee Name</label>
+            <input type="text" th:field=""/>
+            <span th:if="" th:errors=""></span>
+        </div>
+        <div>
+            <label>Employee Birthday</label>
+            <input type="text" th:field=""/>
+            <span th:if="" th:errors=""></span>
+        </div>
+        <div>
+            <label>Employee IdCard</label>
+            <input type="number" th:field=""/>
+            <span th:if="" th:errors=""></span>
+        </div>
+        <div>
+            <label>Employee Salary</label>
+            <input type="number" th:field=""/>
+            <span th:if="" th:errors=""></span>
+        </div>
+        <div>
+            <label>Employee Phone</label>
+            <input type="number" th:field=""/>
+            <span th:if="" th:errors=""></span>
+        </div>
+        <div>
+            <label>Employee Email:</label>
+            <div class="input-group mb-3">
+                <input type="text" th:field=""/>
+                <span th:if="" th:errors=""></span>
+            </div>
+            <p th:if="" th:errors=""></p>
+        </div>
+        <div>
+            <label>Employee Address</label>
+            <input type="text" th:field=""/>
+            <span th:if="" th:errors=""></span>
+        </div>
+        <div>
+            <label>Position</label>
+            <select class="form-control" th:field="">
+                <option th:each="" th:text=""
+                        th:value=""></option>
+            </select>
+        </div>
+        <div>
+            <label>Education Degree</label>
+            <select class="form-control" th:field="">
+                <option th:each="" th:text=""
+                        th:value=""></option>
+            </select>
+        </div>
+        <div>
+            <label>Division</label>
+            <select class="form-control" th:field="">
+                <option th:each="" th:text=""
+                        th:value=""></option>
+            </select>
+        </div>
+        <input type="submit" value="Edit"/>
+    </form>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

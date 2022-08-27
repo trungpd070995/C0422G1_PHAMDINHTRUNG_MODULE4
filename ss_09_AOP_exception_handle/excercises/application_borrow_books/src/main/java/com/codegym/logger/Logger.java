@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class Logger {
+
     int count = 0;
 
     @Pointcut("within(com.codegym.controller.BookController*)")
