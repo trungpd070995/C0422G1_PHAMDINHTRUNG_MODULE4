@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:replace="~{/layout::header}"></div>
+<p>
+    <a th:href="">
+        Add new customer
+    </a>
+</p>
+<table id="furama">
+    <tr>
+        <th>STT</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date Of Birth</th>
+        <th>Gender</th>
+        <th>Id card</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Customer type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="">
+        <td th:text=""></td>
+        <td th:text=""></td>
+        <td th:text=""></td>
+        <td th:text=""></td>
+        <td th:if="" th:text="Male"></td>
+        <td th:if="" th:text="Female"></td>
+        <td th:text=""></td>
+        <td th:text=""></td>
+        <td th:text=""></td>
+        <td th:text=""></td>
+        <td th:text=""></td>
+        <td><a th:href="">edit</a></td>
+        <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    th:data-bs-target="">
+                Delete
+            </button>
+            <div class="modal fade" th:id="" data-bs-backdrop="static"
+                 data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form th:action=""
+                          method="POST">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Do you want delete
+                                <span class="text-info" th:text=""></span>
+                                <input type="hidden" th:value="" name="id">
+                            </div>
 
+                            <button type="submit" class="btn btn-outline-success">Delete</button>
+                            <button type="button" class="btn btn-secondary center-pill" data-bs-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<div>
+    <a th:href="" th:if="">Previous</a>
+    <span th:text=""></span>
+    /
+    <span th:text=""></span>
+    <a th:href="" th:if="">Next</a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
