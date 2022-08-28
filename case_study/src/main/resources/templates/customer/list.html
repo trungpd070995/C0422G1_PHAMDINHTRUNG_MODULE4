@@ -6,12 +6,15 @@
 </head>
 <body>
 <div th:replace="~{/layout::header}"></div>
-<p>
-    <a th:href="">
-        Add new customer
-    </a>
-</p>
-<table id="furama">
+
+<div class="row" style="text-align: center">
+    <h2>
+        <a th:href="@{/customer/create}">
+            <button type="button" class="btn btn-primary">Add New Customer</button>
+        </a>
+    </h2>
+</div>
+<table class="table table-success text-center table-striped" id="tableCustomer" style="width: 100%">
     <tr>
         <th>STT</th>
         <th>ID</th>
@@ -26,29 +29,29 @@
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-    <tr th:each="">
-        <td th:text=""></td>
-        <td th:text=""></td>
-        <td th:text=""></td>
-        <td th:text=""></td>
-        <td th:if="" th:text="Male"></td>
-        <td th:if="" th:text="Female"></td>
-        <td th:text=""></td>
-        <td th:text=""></td>
-        <td th:text=""></td>
-        <td th:text=""></td>
-        <td th:text=""></td>
-        <td><a th:href="">edit</a></td>
+    <tr th:each="customer,status : ${customerList}">
+        <td th:text="${customer.customerId}"></td>
+        <td th:text="${customer.customerCode}"></td>
+        <td th:text="${customer.customerName}"></td>
+        <td th:text="${customer.customerBirthday}"></td>
+        <td th:if="${customer.customerGender==0}" th:text="Male"></td>
+        <td th:if="${customer.customerGender==1}" th:text="Female"></td>
+        <td th:text="${customer.customerIdCard}"></td>
+        <td th:text="${customer.customerPhone}"></td>
+        <td th:text="${customer.customerMail}"></td>
+        <td th:text="${customer.customerAddress}"></td>
+        <td th:text="${customer.customerType.name}"></td>
+        <td><a th:href="@{/customer/{id}/edit(id=${customer.getCustomerId()})}">edit</a></td>
         <td>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    th:data-bs-target="">
+                    th:data-bs-target="'#a' + ${customer.customerId}">
                 Delete
             </button>
-            <div class="modal fade" th:id="" data-bs-backdrop="static"
+            <div class="modal fade" th:id="a + ${customer.customerId}" data-bs-backdrop="static"
                  data-bs-keyboard="false"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form th:action=""
+                    <form th:action="@{/customer/delete}"
                           method="POST">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -58,8 +61,8 @@
                             </div>
                             <div class="modal-body">
                                 Do you want delete
-                                <span class="text-info" th:text=""></span>
-                                <input type="hidden" th:value="" name="id">
+                                <span class="text-info" th:text="${customer.customerName}"></span>
+                                <input type="hidden" th:value="${customer.customerId}" name="id">
                             </div>
 
                             <button type="submit" class="btn btn-outline-success">Delete</button>
@@ -73,11 +76,9 @@
     </tr>
 </table>
 <div>
-    <a th:href="" th:if="">Previous</a>
-    <span th:text=""></span>
-    /
-    <span th:text=""></span>
-    <a th:href="" th:if="">Next</a>
+    <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous</a>
+    <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
+    <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>
 </div>
 <footer th:replace="/layout :: footer"></footer>
 </body>
