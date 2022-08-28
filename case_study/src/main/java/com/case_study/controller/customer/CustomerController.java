@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -65,6 +62,45 @@ public class CustomerController {
             redirectAttributes.addFlashAttribute("message", "Create OK!");
             model.addAttribute("customerList", customerService.findAll());
         }
+        return "redirect:/customer";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable int id, Model model) {
+        model.addAttribute("customerDto", customerService.findById(id));
+        model.addAttribute("customerTypeList", customerTypeService.findAll());
+        return "/customer/edit";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute @Validated CustomerDto customerDto,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes,
+                         Model model) {
+        new CustomerDto().validate(customerDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("customerTypeList", customerTypeService.findAll());
+            return "customer/edit";
+        } else {
+            Customer customer = new Customer();
+            BeanUtils.copyProperties(customerDto, customer);
+
+            customerService.update(customer.getCustomerId(), customer);
+            redirectAttributes.addFlashAttribute("message", "Create OK!");
+            model.addAttribute("customerList", customerService.findAll());
+        }
+        return "redirect:/customer";
+    }
+
+    @GetMapping("/{id}/delete")
+    private String delete(@PathVariable int id, Model model) {
+        model.addAttribute("customer", customerService.findById(id));
+        return "/customer/delete";
+    }
+
+    @PostMapping("/delete")
+    public String delete(int id) {
+        customerService.remove(id);
         return "redirect:/customer";
     }
 }
