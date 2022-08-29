@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/layout::head}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>List Customer</title>
 </head>
 <body>
 <div th:replace="~{/layout::header}"></div>
 
 <div class="row" style="text-align: center">
+    <h2>DANH SÁCH KHÁCH HÀNG</h2>
     <h2>
         <a th:href="@{/customer/create}">
             <button type="button" class="btn btn-primary">Add New Customer</button>
@@ -41,7 +42,11 @@
         <td th:text="${customer.customerMail}"></td>
         <td th:text="${customer.customerAddress}"></td>
         <td th:text="${customer.customerType.name}"></td>
-        <td><a th:href="@{/customer/{id}/edit(id=${customer.getCustomerId()})}">edit</a></td>
+        <td>
+            <button type="button" class="btn btn-danger"
+                    th:href="@{/customer/{id}/edit(id=${customer.getCustomerId()})}">Edit
+            </button>
+        </td>
         <td>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                     th:data-bs-target="'#a' + ${customer.customerId}">
@@ -54,8 +59,8 @@
                     <form th:action="@{/customer/delete}"
                           method="POST">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <div class="modal-header btn btn-danger">
+                                <h5 class="modal-title" id="staticBackdropLabel">Xác nhận xoá </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
