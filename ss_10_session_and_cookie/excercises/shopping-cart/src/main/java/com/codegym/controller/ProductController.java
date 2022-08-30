@@ -2,6 +2,7 @@ package com.codegym.controller;
 
 import com.codegym.model.Cart;
 import com.codegym.model.Product;
+import com.codegym.service.CartServiceImpl;
 import com.codegym.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private IProductService productService;
+
+    @Autowired
+    private CartServiceImpl cartService;
 
     @ModelAttribute("cart")
     public Cart setupCart() {
@@ -36,19 +40,22 @@ public class ProductController {
             return "/error.404";
         }
         if (action.equals("show")) {
-            cart.addProduct(productOptional.get());
+            cartService.addProduct(productOptional.get(),cart);
+            cartService.updateCart(cart);
             return "redirect:/shopping-cart";
         }
         if (action.equals("reduce")) {
-            cart.reduceProduct(productOptional.get());
+            cartService.reduceProduct(productOptional.get(),cart);
+            cartService.updateCart(cart);
             return "redirect:/shopping-cart";
         }
         if (action.equals("detail")) {
             model.addAttribute("product", productOptional.get());
-            cart.addProduct(productOptional.get());
+            cartService.addProduct(productOptional.get(),cart);
             return "redirect:/detail/{id}";
         }
-        cart.addProduct(productOptional.get());
+        cartService.addProduct(productOptional.get(),cart);
+        cartService.updateCart(cart);
         return "redirect:/shop";
     }
 
@@ -60,7 +67,15 @@ public class ProductController {
     @GetMapping("/remove/{id}")
     public String removeProduct(@PathVariable Long id, @ModelAttribute Cart cart) {
         Optional<Product> productOptional = productService.findById(id);
-        cart.removeProduct(productOptional.get());
+        cartService.removeProduct(productOptional.get(),cart);
+        cartService.updateCart(cart);
         return "redirect:/shopping-cart";
+    }
+
+    @GetMapping("/payment")
+    public String payment (@SessionAttribute("cart") Cart cart){
+        cartService.clearCart(cart);
+        cartService.updateCart(cart);
+        return "redirect:/shop";
     }
 }
