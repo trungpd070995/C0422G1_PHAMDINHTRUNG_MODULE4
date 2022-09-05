@@ -1,9 +1,10 @@
-package com.codegym.service;
+package vn.codegym.phone_management.service;
 
-import com.codegym.model.Smartphone;
-import com.codegym.repository.ISmartphoneRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.codegym.phone_management.model.Smartphone;
+import vn.codegym.phone_management.repository.ISmartphoneRepository;
 
 import java.util.Optional;
 

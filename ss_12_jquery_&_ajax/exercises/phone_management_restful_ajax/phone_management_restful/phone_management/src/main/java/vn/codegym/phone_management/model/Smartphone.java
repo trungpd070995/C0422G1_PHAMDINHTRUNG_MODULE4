@@ -1,13 +1,13 @@
-package com.codegym.model;
+package vn.codegym.phone_management.model;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="smartphones")
+@Table(name = "smartphones")
 public class Smartphone {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String producer;
     private String model;
@@ -56,7 +56,7 @@ public class Smartphone {
 
     @Override
     public String toString() {
-        return producer+": "+model+" with price "+price;
+        return producer + ": " + model + " with price " + price;
     }
 
 }

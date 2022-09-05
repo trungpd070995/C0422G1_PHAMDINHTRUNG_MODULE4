@@ -1,6 +1,7 @@
-package com.codegym.service;
+package vn.codegym.phone_management.service;
 
-import com.codegym.model.Smartphone;
+
+import vn.codegym.phone_management.model.Smartphone;
 
 import java.util.Optional;
 
