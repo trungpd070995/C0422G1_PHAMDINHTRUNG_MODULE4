@@ -40,4 +40,3 @@ public class RentType {
         this.facility = facility;
     }
 }
-

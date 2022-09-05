@@ -2,48 +2,42 @@ package com.case_study.model.facility;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class FacilityType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String name;
+    private int facilityTypeId;
+    private String facilityTypeName;
 
     @OneToMany(mappedBy = "facilityType")
-    private List<Facility> facilityList;
+    private Set<Facility> facility;
 
     public FacilityType() {
     }
 
-    public FacilityType(Integer id, String name, List<Facility> facilityList) {
-        this.id = id;
-        this.name = name;
-        this.facilityList = facilityList;
+    public int getFacilityTypeId() {
+        return facilityTypeId;
     }
 
-    public Integer getId() {
-        return id;
+    public void setFacilityTypeId(int facilityTypeId) {
+        this.facilityTypeId = facilityTypeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getFacilityTypeName() {
+        return facilityTypeName;
     }
 
-    public String getName() {
-        return name;
+    public void setFacilityTypeName(String facilityTypeName) {
+        this.facilityTypeName = facilityTypeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Set<Facility> getFacility() {
+        return facility;
     }
 
-    public List<Facility> getFacilityList() {
-        return facilityList;
-    }
-
-    public void setFacilityList(List<Facility> facilityList) {
-        this.facilityList = facilityList;
+    public void setFacility(Set<Facility> facility) {
+        this.facility = facility;
     }
 }

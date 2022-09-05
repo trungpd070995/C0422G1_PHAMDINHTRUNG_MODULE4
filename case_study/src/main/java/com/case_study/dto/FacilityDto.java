@@ -1,11 +1,11 @@
-package com.case_study.model.facility;
+package com.case_study.dto;
 
-import javax.persistence.*;
+import com.case_study.model.facility.FacilityType;
+import com.case_study.model.facility.RentType;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-@Entity
-public class Facility {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FacilityDto implements Validator {
     private int facilityId;
     private String facilityName;
     private int area;
@@ -14,19 +14,12 @@ public class Facility {
     private String standardRoom;
     private String descriptionOtherConvenience;
     private double poolArea;
-    private int numberOfFloors;
+    private String numberOfFloors;
     private String facilityFree;
-    private boolean deleteStatus;
-
-    @ManyToOne
-    @JoinColumn(name = "rent_type_id", referencedColumnName = "rentTypeId")
     private RentType rentType;
-
-    @ManyToOne
-    @JoinColumn(name = "facility_type_id", referencedColumnName = "facilityTypeId")
     private FacilityType facilityType;
 
-    public Facility() {
+    public FacilityDto() {
     }
 
     public int getFacilityId() {
@@ -93,11 +86,11 @@ public class Facility {
         this.poolArea = poolArea;
     }
 
-    public int getNumberOfFloors() {
+    public String getNumberOfFloors() {
         return numberOfFloors;
     }
 
-    public void setNumberOfFloors(int numberOfFloors) {
+    public void setNumberOfFloors(String numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
     }
 
@@ -125,11 +118,13 @@ public class Facility {
         this.facilityType = facilityType;
     }
 
-    public boolean isDeleteStatus() {
-        return deleteStatus;
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
     }
 
-    public void setDeleteStatus(boolean deleteStatus) {
-        this.deleteStatus = deleteStatus;
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }
