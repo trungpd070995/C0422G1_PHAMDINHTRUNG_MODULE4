@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone List</title>
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <link rel="stylesheet" href="css/momo.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container mt-4">
+    <div class="row w-50 mx-auto">
+        <div class="col-lg-10">
+            <input class="form-control" type="text" id="keyword">
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-primary bg-momo" id="btnSearch">Search</button>
+        </div>
+    </div>
+    <div class="row w-50 mx-auto mt-4" id="listPhone">
+        <div class="col-lg-12">
+            <h2>Phone list</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Producer</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="bodyPhone">
+                </tbody>
+            </table>
+            <button type="button" id="findMore">Xem thêm</button>
+        </div>
+    </div>
+</div>
+<div id="formEdit" class="container" style="margin-left: auto" >
+    <form>
+        <label for="idPhone">ID</label>
+        <input id="idPhone"><br>
+        <label for="producerPhone">producer</label>
+        <input id="producerPhone"><br>
+        <label for="modelPhone">model</label>
+        <input id="modelPhone"><br>
+        <label for="pricePhone">price</label>
+        <input id="pricePhone"><br>
+        <button id="update" type="button">Update</button>
+
+    </form>
+</div>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/mdb.min.js"></script>
+<script>
+    $(document).ready(function () {
+        getPageList();
+        onload=getPageList();
+    })
+
+    function getPageList() {
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            url: "http://localhost:8080/smart/list",
+            success: function (page) {
+                let phoneList = page;
+
+                let htmlStr = '';
+
+                for (let i = 0; i < phoneList.length; i++) {
+                    htmlStr += `<tr>
+                        <td>${i + 1}</td>
+                        <td>${phoneList[i].id}</td>
+                        <td>${phoneList[i].producer}</td>
+                        <td>${phoneList[i].model}</td>
+                        <td>${phoneList[i].price}</td>
+                        <td>
+                            <button id="update">Update</button>
+                        </td>
+                        <td>
+                            <a href="#">Delete</a>
+                        </td>
+                    </tr>`;
+                }
+
+                $("#bodyPhone").html(htmlStr);
+            },
+            error: function (resultError) {
+            }
+        });
+    }
+</script>
+<script>
+    function editPhone(id) {
+        console.log(id)
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET",
+            url: "http://localhost:8080/smartphone/showUpdate?id=" + id,
+            success: function (smartphone) {
+                console.log(smartphone.id);
+                $('#list').hide()
+                $("#formEdit").show();
+
+                $("#idPhone").val(smartphone.id);
+                $("#producerPhone").val(smartphone.producer)
+                $("#modelPhone").val(smartphone.model)
+                $("#pricePhone").val(smartphone.price)
+
+            },
+            error: function (resultError) {
+
+            }
+        })
+    }
+    $("#update").click(function () {
+        let id = $("#idPhone").val();
+        let producer = $("#producerPhone").val();
+        let model = $("#modelPhone").val()
+        let price = $("#pricePhone").val()
+        let smartphone = {
+            id: id,
+            producer: producer,
+            model: model,
+            price: price
+        };
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            url: "http://localhost:8080/smartphone/saveUpdate",
+            data: JSON.stringify(smartphone),
+            success: function (resultSuccess) {
+                alert('register successfully ')
+            },
+            error: function (resultError) {
+                alert('error');
+            }
+
+        });
+    });
+    onload=getPageList()
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>

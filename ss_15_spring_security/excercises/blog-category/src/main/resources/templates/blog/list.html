@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>blog list</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="nav navbar-brand" th:include="/_menu"></nav>
+<div class="container">
+    <h3>Blog List</h3>
+    <a href="/blogs/showFormCreate">Create new blog</a>
+    <a href="/blogs/showFormCreateCategory">Create new Category</a>
+    <form action="/blogs/list">
+        <div class="input-group mb-3">
+            <select name="categoryName">
+                <option th:each="categorys : ${category}"
+                        th:value="${categorys.categoryName}"
+                        th:text="${categorys.categoryName}">
+                </option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" aria-describedby="button-addon2" name="name">
+        </div>
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+    </form>
+
+    <table border="1" class="table">
+        <tr>
+            <th>#</th>
+            <th>Blog Name</th>
+            <th>Author Name</th>
+            <th>Category</th>
+            <th colspan="3">Action</th>
+        </tr>
+        <tr th:each="blog, status : ${blogList}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${blog.blogName}"></td>
+            <td th:text="${blog.authorName}"></td>
+            <td th:text="${blog.category.categoryName}"></td>
+            <th:block th:if="${userInfo != null}">
+                <th:block th:each="role:${userInfo}">
+                    <th:block th:if="${role.authority.equals('ROLE_ADMIN')}">
+                        <td>
+                            <a class="btn btn-success bg-gradient" th:href="@{/blogs/edit-blog/__${blog.id}__ }">Edit</a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    th:onclick="|deleteBlog(${blog.id})|">
+                                Delete
+                            </button>
+                        </td>
+                    </th:block>
+                </th:block>
+            </th:block>
+            <td><a th:href="@{/blogs/view-blog/__${blog.id}__ }" class="btn btn-primary">View blog</a></td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-lg-12">
+            <a th:href="@{/blogs/list(page=${blogList.number - 1}, name = ${keyVal})}" th:if="${blogList.hasPrevious()}">previous</a>
+            <span th:text="${blogList.number + 1}"></span> / <span th:text="${blogList.totalPages}"></span>
+            <a th:href="@{/blogs/list(page=${blogList.number + 1}, name = ${keyVal})}" th:if="${blogList.hasNext()}">next</a>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="@{/blogs/delete}" method="get">
+        <div class="modal-dialog">.
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" readonly class="form-control" id="deleteId" name="id">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function deleteBlog(id) {
+        document.getElementById("deleteId").value = id;
+    }
+</script>
+</body>
+</html>

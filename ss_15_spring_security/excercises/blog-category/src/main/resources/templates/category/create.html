@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>create category</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="col-md-5" style="margin: auto">
+    <form action="/create-category" method="post" th:object="${category}">
+        <h1>Create category</h1>
+        <label>CateGory Name</label>
+        <input type="text" th:field="*{categoryName}" class="form-control">
+        <button type="submit" class="btn btn-danger">Save</button>
+        <a class="btn btn-primary" href="/list">Back</a>
+    </form>
+</div>
+</body>
+</html>

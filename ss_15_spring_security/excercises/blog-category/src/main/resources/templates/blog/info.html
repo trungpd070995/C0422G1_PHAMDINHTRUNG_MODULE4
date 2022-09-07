@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>view blog</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="col-md-5" style="margin: auto">
+    <div th:object="${blog}">
+        <h1 th:text="*{blogName}"></h1>
+        <p>Author: <span th:text="*{authorName}"></span></p>
+        <p th:text="*{blogContent}"></p>
+        <p>Category:<span th:text="*{category.categoryName}"></span> </p>
+    </div>
+</div>
+</body>
+</html>
