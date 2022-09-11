@@ -6,11 +6,11 @@
 </head>
 <body>
 <div th:replace="~{/layout::header}"></div>
-<button type="button" class="btn btn-outline-info mt-4">
-    <a th:href="@{/customer}">
+
+    <a class="btn btn-success mt-3" th:href="@{/customer}">
         Back to customer list
     </a>
-</button>
+
 <div id="form">
     <form th:action="@{/customer/update}" th:object="${customerDto}"
           method="POST" novalidate="novalidate">
@@ -36,7 +36,8 @@
                 <th>Customer Birthday</th>
                 <td>
                     <input type="text" th:field="*{customerBirthday}"/>
-                    <span th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}"></span>
+                    <span th:if="${#fields.hasErrors('customerBirthday')}"
+                          th:errors="*{customerBirthday}"></span>
                 </td>
             </tr>
             <tr>

@@ -1,14 +1,13 @@
 package com.case_study.model.facility;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 public class FacilityType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int facilityTypeId;
+    private Integer facilityTypeId;
     private String facilityTypeName;
 
     @OneToMany(mappedBy = "facilityType")
@@ -17,11 +16,11 @@ public class FacilityType {
     public FacilityType() {
     }
 
-    public int getFacilityTypeId() {
+    public Integer getFacilityTypeId() {
         return facilityTypeId;
     }
 
-    public void setFacilityTypeId(int facilityTypeId) {
+    public void setFacilityTypeId(Integer facilityTypeId) {
         this.facilityTypeId = facilityTypeId;
     }
 

@@ -6,17 +6,18 @@ import javax.persistence.*;
 public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int facilityId;
+    private Integer facilityId;
     private String facilityName;
-    private int area;
-    private double cost;
-    private int maxPeople;
+    private Integer area;
+    private Double cost;
+    private Integer maxPeople;
     private String standardRoom;
     private String descriptionOtherConvenience;
-    private double poolArea;
-    private int numberOfFloors;
+    private Double poolArea;
+    private Integer numberOfFloors;
     private String facilityFree;
-    private boolean deleteStatus;
+
+    private Boolean deleteStatus;
 
     @ManyToOne
     @JoinColumn(name = "rent_type_id", referencedColumnName = "rentTypeId")
@@ -29,11 +30,11 @@ public class Facility {
     public Facility() {
     }
 
-    public int getFacilityId() {
+    public Integer getFacilityId() {
         return facilityId;
     }
 
-    public void setFacilityId(int facilityId) {
+    public void setFacilityId(Integer facilityId) {
         this.facilityId = facilityId;
     }
 
@@ -45,27 +46,27 @@ public class Facility {
         this.facilityName = facilityName;
     }
 
-    public int getArea() {
+    public Integer getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(Integer area) {
         this.area = area;
     }
 
-    public double getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 
-    public int getMaxPeople() {
+    public Integer getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(int maxPeople) {
+    public void setMaxPeople(Integer maxPeople) {
         this.maxPeople = maxPeople;
     }
 
@@ -85,19 +86,19 @@ public class Facility {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
     }
 
-    public double getPoolArea() {
+    public Double getPoolArea() {
         return poolArea;
     }
 
-    public void setPoolArea(double poolArea) {
+    public void setPoolArea(Double poolArea) {
         this.poolArea = poolArea;
     }
 
-    public int getNumberOfFloors() {
+    public Integer getNumberOfFloors() {
         return numberOfFloors;
     }
 
-    public void setNumberOfFloors(int numberOfFloors) {
+    public void setNumberOfFloors(Integer numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
     }
 
@@ -125,11 +126,11 @@ public class Facility {
         this.facilityType = facilityType;
     }
 
-    public boolean isDeleteStatus() {
+    public Boolean isDeleteStatus() {
         return deleteStatus;
     }
 
-    public void setDeleteStatus(boolean deleteStatus) {
+    public void setDeleteStatus(Boolean deleteStatus) {
         this.deleteStatus = deleteStatus;
     }
 }

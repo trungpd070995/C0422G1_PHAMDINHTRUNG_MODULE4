@@ -6,66 +6,90 @@
 </head>
 <body>
 <div th:replace="~{/layout::header}"></div>
-<p>
-    <a th:href="@{/facility}">
-        Back to facility list
-    </a>
-</p>
+<div class="row" style="text-align: center;">
+    <h2>CHỈNH SỬA DỊCH VỤ</h2>
+    <h2>
+        <a th:href="@{/facility}">
+            <button type="button" class="btn btn-success mt-2"> Back to customer list</button>
+        </a>
+    </h2>
+</div>
 <div id="form">
-    <form th:action="@{/facility/update}" th:object="${facility}"
-          method="POST" novalidate="novalidate">
-        <input type="hidden" th:field="*{facilityId}"/>
+    <form class="m-auto w-50" th:action="@{/facility/update}" th:object="${facility}" method="POST"
+          novalidate="novalidate">
+        <input type="hidden" class="form-control" th:field="*{facilityId}"/>
         <div>
             <label>Facility Type</label>
-            <select class="form-control" facilityTypeId="type" th:field="*{facilityType}" onchange="facilitys(this.value)">
+            <select class="form-select" th:field="*{facilityType}" onchange="facilitys(this.value)">
                 <option th:each="item:${facilityTypeList}" th:text="${item.facilityTypeName}"
                         th:value="${item.facilityTypeId}"></option>
             </select>
         </div>
-        <div>
-            <label>Facility Name</label>
-            <input type="text" th:field="*{facilityName}"/>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Facility Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name"
+                   th:field="*{facilityName}">
         </div>
-        <div>
-            <label>Area</label>
-            <input type="number" th:field="*{area}"/>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail2" class="form-label">Area</label>
+            <input type="number" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" name="name"
+                   th:field="*{area}">
         </div>
-        <div>
-            <label>Cost</label>
-            <input type="number" th:field="*{cost}"/>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail3" class="form-label">Cost</label>
+            <input type="number" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp" name="name"
+                   th:field="*{cost}">
         </div>
-        <div>
-            <label>Max People</label>
-            <input type="number" th:field="*{maxPeople}"/>
+        <div class="mb-3">
+            <label for="exampleInputEmail4" class="form-label">Cost</label>
+            <input type="number" class="form-control" id="exampleInputEmail4" aria-describedby="emailHelp" name="name"
+                   th:field="*{cost}">
         </div>
-        <div class="villa house">
-            <label>Standard Room</label>
-            <input type="text" th:field="*{standardRoom}"/>
+        <div class="mb-3">
+            <label for="exampleInputEmail5" class="form-label">Max People</label>
+            <input type="number" class="form-control" id="exampleInputEmail5" aria-describedby="emailHelp" name="name"
+                   th:field="*{maxPeople}">
         </div>
-        <div class="villa house">
-            <label>Description Other Convenience</label>
-            <input type="text" th:field="*{descriptionOtherConvenience}"/>
+        <div class="villa house mb-3">
+            <label for="exampleInputEmail16" class="form-label">Standard Room</label>
+            <input type="text" class="form-control" id="exampleInputEmail16" aria-describedby="emailHelp" name="name"
+                   th:field="*{standardRoom}">
         </div>
-        <div class="villa">
-            <label>Pool Area</label>
-            <input type="number" th:field="*{poolArea}"/>
+        <div class="villa house mb-3">
+            <label for="exampleInputEmail17" class="form-label">Description Other Convenience</label>
+            <input type="text" class="form-control" id="exampleInputEmail17" aria-describedby="emailHelp" name="name"
+                   th:field="*{descriptionOtherConvenience}">
         </div>
-        <div class="villa house">
-            <label>Number Of Floors</label>
-            <input type="number" th:field="*{numberOfFloors}"/>
+        <div class="villa mb-3">
+            <label for="exampleInputEmail18" class="form-label">Pool Area</label>
+            <input type="number" class="form-control" id="exampleInputEmail18" aria-describedby="emailHelp" name="name"
+                   th:field="*{poolArea}">
         </div>
-        <div class="room" style="display: none">
-            <label>Facility Free</label>
-            <input type="text" th:field="*{facilityFree}"/>
+        <div class="villa house mb-3">
+            <label for="exampleInputEmail19" class="form-label">Number Of Floors</label>
+            <input type="number" class="form-control" id="exampleInputEmail19" aria-describedby="emailHelp" name="name"
+                   th:field="*{numberOfFloors}">
         </div>
+        <div class="room mb-3" style="display: none">
+            <label for="exampleInputEmail20" class="form-label">Facility Free</label>
+            <input type="text" class="form-control" id="exampleInputEmail20" aria-describedby="emailHelp" name="name"
+                   th:field="*{facilityFree}">
+        </div>
+
         <div>
             <label>Rent Type</label>
-            <select class="form-control" th:field="*{rentType}">
+            <select class="form-select" th:field="*{rentType}">
                 <option th:each="item:${rentTypeList}" th:text="${item.rentTypeName}"
                         th:value="${item.rentTypeId}"></option>
             </select>
         </div>
-        <input type="submit" value="Edit"/>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-success">
+                Edit
+            </button>
+        </div>
     </form>
 </div>
 <script>
