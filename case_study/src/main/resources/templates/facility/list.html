@@ -15,8 +15,8 @@
     </a>
 </p>
     <div th:if="${message!= null}">
-        <span th:text="${message}"></span>
-    </div>
+        <span style="color:red" th:text="${message}"></span>
+    </div>l
 <table class="table table-success text-center table-striped" id="tableFacility" style="width: 100%">
     <tr>
         <th>STT</th>
@@ -39,7 +39,7 @@
         <td th:text="${facility.facilityId}"></td>
         <td th:text="${facility.facilityName}"></td>
         <td th:text="${facility.area}"></td>
-        <td th:text="${facility.cost}"></td>
+        <td th:text="${#numbers.formatCurrency(facility.cost)}"></td>
         <td th:text="${facility.maxPeople}"></td>
         <td th:text="${facility.standardRoom}"></td>
         <td th:text="${facility.descriptionOtherConvenience}"></td>

@@ -26,6 +26,8 @@ public class Contract {
     @JoinColumn(name = "facility_id", referencedColumnName = "facilityId")
     private Facility facility;
 
+    private transient Double totalMoney;
+
     public Contract() {
     }
 
@@ -84,4 +86,13 @@ public class Contract {
     public void setFacility(Facility facility) {
         this.facility = facility;
     }
+
+    public Double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(Double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
 }

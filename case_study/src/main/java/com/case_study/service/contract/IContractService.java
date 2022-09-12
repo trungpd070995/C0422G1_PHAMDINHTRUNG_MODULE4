@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IContractService {
+
     List<Contract> findAll();
 
     void save(Contract contract);
@@ -19,5 +20,7 @@ public interface IContractService {
     void remove(int contractId);
 
     Page<Contract> findAll(Pageable pageable);
+
+    Page<Contract> totalMoney(Pageable pageable);
 
 }

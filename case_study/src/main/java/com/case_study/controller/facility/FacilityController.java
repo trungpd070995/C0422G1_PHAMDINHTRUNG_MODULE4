@@ -31,7 +31,7 @@ public class FacilityController {
     @Autowired
     private IFacilityTypeService facilityTypeService;
 
-    @GetMapping("/list")
+    @GetMapping(value = {"/list"})
     public String index(Model model) {
         List<Facility> facilityList = facilityService.findAll();
         model.addAttribute("facilityList", facilityList);
@@ -62,9 +62,9 @@ public class FacilityController {
         } else {
             Facility facility = new Facility();
             BeanUtils.copyProperties(facilityDto, facility);
-
+            facility.setDeleteStatus(false);
             facilityService.save(facility);
-            redirectAttributes.addFlashAttribute("message", "Create OK!");
+            redirectAttributes.addFlashAttribute("message", "Thêm mới thành công !!");
             model.addAttribute("facilityList", facilityService.findAll());
         }
         return "redirect:/facility";
@@ -92,7 +92,7 @@ public class FacilityController {
             BeanUtils.copyProperties(facilityDto, facility);
 
             facilityService.update(facility.getFacilityId(), facility);
-            redirectAttributes.addFlashAttribute("message", "Create OK!");
+            redirectAttributes.addFlashAttribute("message", "Chỉnh sửa thành công..!!");
             model.addAttribute("facilityList", facilityService.findAll());
         }
         return "redirect:/facility";

@@ -1,6 +1,10 @@
 package com.case_study.service.contract;
 
+import com.case_study.model.contract.AttachFacility;
 import com.case_study.model.contract.Contract;
+import com.case_study.model.contract.ContractDetail;
+import com.case_study.repository.contract.IAttachFacilityRepository;
+import com.case_study.repository.contract.IContractDetailRepository;
 import com.case_study.repository.contract.IContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +18,13 @@ import java.util.Optional;
 public class ContractService implements IContractService {
     @Autowired
     private IContractRepository contractRepository;
+
+    @Autowired
+    private IContractDetailRepository contractDetailRepository;
+
+    @Autowired
+    private IAttachFacilityRepository attachFacilityRepository;
+
 
     @Override
     public List<Contract> findAll() {
@@ -43,5 +54,29 @@ public class ContractService implements IContractService {
     @Override
     public Page<Contract> findAll(Pageable pageable) {
         return contractRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Contract> totalMoney(Pageable pageable) {
+        Page<Contract> contractList = this.findAll(pageable);
+        List<AttachFacility> attachFacilityList = attachFacilityRepository.findAll();
+        List<ContractDetail> contractDetailList = contractDetailRepository.findAll();
+        for (Contract c: contractList) {
+            double totalDetail = 0;
+            double costFacility = 0;
+
+            for (ContractDetail item : contractDetailList) {
+                if (item.getContract().getContractId() == c.getContractId()) {
+                    for (AttachFacility attach : attachFacilityList) {
+                        if (attach.getAttachFacilityId() == item.getAttachFacility().getAttachFacilityId()) {
+                            costFacility += item.getQuantity() * attach.getCost();
+                        }
+                    }
+                }
+            }
+            totalDetail = costFacility + c.getFacility().getCost();
+            c.setTotalMoney(totalDetail);
+        }
+        return contractList;
     }
 }

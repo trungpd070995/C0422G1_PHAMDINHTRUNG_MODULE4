@@ -14,6 +14,11 @@
         </a>
     </h2>
 </div>
+
+<div th:if="${message!= null}">
+    <span style="color: red" th:text="${message}"></span>
+</div>
+
 <div id="form">
     <form class="m-auto w-50" th:action="@{/facility/update}" th:object="${facility}" method="POST"
           novalidate="novalidate">
@@ -93,32 +98,6 @@
     </form>
 </div>
 <script>
-    let facilityTypeId = document.getElementById("type").value;
-    house = document.getElementsByClassName("house");
-    room = document.getElementsByClassName("room");
-    villa = document.getElementsByClassName("villa");
-    for (let i = 0; i < house.length; i++) {
-        house[i].style.display = "none";
-    }
-    for (let i = 0; i < room.length; i++) {
-        room[i].style.display = "none";
-    }
-    for (let i = 0; i < villa.length; i++) {
-        villa[i].style.display = "none";
-    }
-    if (facilityTypeId == 1) {
-        for (let i = 0; i < villa.length; i++) {
-            villa[i].style.display = "block";
-        }
-    } else if (facilityTypeId == 2) {
-        for (let i = 0; i < house.length; i++) {
-            house[i].style.display = "block";
-        }
-    } else {
-        for (let i = 0; i < room.length; i++) {
-            room[i].style.display = "block";
-        }
-    }
 
     function facilitys(facilityTypeId) {
         house = document.getElementsByClassName("house");
@@ -151,3 +130,30 @@
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>
+
+<!--let facilityTypeId = document.getElementById("type").value;-->
+<!--house = document.getElementsByClassName("house");-->
+<!--room = document.getElementsByClassName("room");-->
+<!--villa = document.getElementsByClassName("villa");-->
+<!--for (let i = 0; i < house.length; i++) {-->
+<!--house[i].style.display = "none";-->
+<!--}-->
+<!--for (let i = 0; i < room.length; i++) {-->
+<!--room[i].style.display = "none";-->
+<!--}-->
+<!--for (let i = 0; i < villa.length; i++) {-->
+<!--villa[i].style.display = "none";-->
+<!--}-->
+<!--if (facilityTypeId == 1) {-->
+<!--for (let i = 0; i < villa.length; i++) {-->
+<!--villa[i].style.display = "block";-->
+<!--}-->
+<!--} else if (facilityTypeId == 2) {-->
+<!--for (let i = 0; i < house.length; i++) {-->
+<!--house[i].style.display = "block";-->
+<!--}-->
+<!--} else {-->
+<!--for (let i = 0; i < room.length; i++) {-->
+<!--room[i].style.display = "block";-->
+<!--}-->
+<!--}-->
