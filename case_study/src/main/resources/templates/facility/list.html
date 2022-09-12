@@ -9,14 +9,18 @@
 
 <body>
 <div th:replace="~{/layout::header}"></div>
-<p>
-    <a class="btn btn-success mt-3" th:href="@{/facility/create}">
-        Add new facility
-    </a>
-</p>
-    <div th:if="${message!= null}">
-        <span style="color:red" th:text="${message}"></span>
-    </div>l
+<div class="row" style="text-align: center;">
+    <h2>DANH SÁCH DỊCH VỤ</h2>
+    <h2>
+        <a class="btn btn-success mt-2" th:href="@{/facility/create}">
+            Add new facility
+        </a>
+    </h2>
+</div>
+
+<div th:if="${message!= null}">
+    <span style="color:red" th:text="${message}"></span>
+</div>
 <table class="table table-success text-center table-striped" id="tableFacility" style="width: 100%">
     <tr>
         <th>STT</th>
@@ -50,7 +54,7 @@
         <td th:text="${facility.facilityType.facilityTypeName}"></td>
         <td>
             <a class="btn btn-danger"
-                    th:href="@{/facility/{id}/edit(id=${facility.getFacilityId()})}">Edit
+               th:href="@{/facility/{id}/edit(id=${facility.getFacilityId()})}">Edit
             </a>
         </td>
         <td>

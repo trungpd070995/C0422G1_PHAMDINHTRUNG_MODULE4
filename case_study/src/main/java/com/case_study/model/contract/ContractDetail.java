@@ -1,5 +1,7 @@
 package com.case_study.model.contract;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class ContractDetail {
     private AttachFacility attachFacility;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "contract_id", referencedColumnName = "contractId")
     private Contract contract;
 

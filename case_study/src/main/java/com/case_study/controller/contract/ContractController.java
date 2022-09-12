@@ -39,6 +39,9 @@ public class ContractController {
     public String index(Model model,@PageableDefault(value = 3) Pageable pageable) {
         Page<Contract> contractList = contractService.totalMoney(pageable);
         model.addAttribute("contractList", contractList);
+        model.addAttribute("customerList", customerService.findAll());
+        model.addAttribute("facilityList", facilityService.findAll());
+        model.addAttribute("contractDetailList", attachFacilityService.findAllAttachFacility());
         return "contract/list";
     }
 

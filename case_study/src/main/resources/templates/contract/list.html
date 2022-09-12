@@ -24,16 +24,17 @@
         <td th:text="${contract.customer.customerName}"></td>
         <td th:text="${contract.startDate}"></td>
         <td th:text="${contract.endDate}"></td>
-        <td th:text="${contract.deposit}"></td>
-        <td th:text="${contract.totalMoney}"></td>
+        <td th:text="${#numbers.formatCurrency(contract.deposit)}"></td>
+        <td th:text="${#numbers.formatCurrency(contract.totalMoney)}"></td>
         <td>
-            <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modelIdCreate" th:href="@{/contract/create}">
+            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modelIdCreate" th:href="@{/contract/create}">
                 +
             </a>
 
-            <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modelId" th:href="@{/contract/..}">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modelId"
+               th:attr="onclick=|getContractDetail(${contract.contractId})|">
                 Danh sách các dịch vụ đi kèm
-            </a>
+            </button>
         </td>
     </tr>
 </table>
@@ -55,7 +56,7 @@
             </div>
             <div class="modal-body">
                 <table class="table table-bordered ">
-                    <thead class="bg-primary text-center text-light">
+                    <thead class="btn-success text-center text-light">
                     <tr>
                         <th>STT</th>
                         <th>Tên</th>
@@ -64,19 +65,13 @@
                         <th>Trạng thái</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="contract, status : ${attachFacilityList}">
-                        <td th:text="${status.count}"></td>
-                        <td th:text="${contract.attachFacilityName}"></td>
-                        <td th:text="${contract.cost}"></td>
-                        <td th:text="${contract.unit}"></td>
-                        <td th:text="${contract.status}"></td>
-                    </tr>
+                    <tbody id = "contractDetailId">
+
                     </tbody>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn-outline-danger " data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -135,20 +130,45 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Danhh sách dịch vụ đi kèm</label>
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary" onclick="selContract()">+</button>
+                            <button type="button" class="btn btn-success" onclick="selContract()">+</button>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-outline-primary btn-sm" value="Create"
-                           onclick="addNewContractDetail()">
+                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-dismiss="modal">Thoát</button>
+                    <input type="submit" class="btn btn-outline-success btn-sm" value="Thêm mới" onclick="addNewContractDetail()">
                 </div>
             </div>
         </div>
     </div>
 </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    function getContractDetail(id) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/contractDetailRestFul/list/" + id,
+            success: function (contractDetails) {
+                let htmlStr = '';
+                for (let i = 0; i < contractDetails.length; i++) {
+                    htmlStr += `<tr>
+                        <td>${i + 1}</td>
+
+                        <td>${contractDetails[i].attachFacility.attachFacilityName}</td>
+                        <td>${contractDetails[i].attachFacility.cost}</td>
+                        <td>${contractDetails[i].attachFacility.unit}</td>
+                        <td>${contractDetails[i].attachFacility.status}</td>
+                    </tr>`;
+                }
+                $("#contractDetailId").html(htmlStr);
+                console.log(htmlStr);
+            },
+            error: function (resultError) {
+            }
+        });
+    }
+</script>
 
 <footer th:replace="/layout :: footer"></footer>
 </body>

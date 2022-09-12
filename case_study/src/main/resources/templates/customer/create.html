@@ -9,102 +9,99 @@
 </head>
 <body>
 <div th:replace="~{/layout::header}"></div>
+<div class="row" style="text-align: center;">
+    <h2>THÊM MỚI KHÁCH HÀNG</h2>
+    <h2>
+        <a th:href="@{/customer}">
+            <button type="button" class="btn btn-success mt-2"> Back to customer list</button>
+        </a>
+    </h2>
+</div>
 
-<h2>
-    <a th:href="@{/customer}">
-        <button type="button" class="btn btn-success mt-4"> Back to customer list</button>
-    </a>
-</h2>
+<div>
+    <form class="m-auto w-50" th:action="@{/customer/save}" th:object="${customerDto}" method="POST"
+          novalidate="novalidate">
 
-<div >
-    <form th:action="@{/customer/save}" th:object="${customerDto}" method="POST" novalidate="novalidate">
+        <input type="hidden" class="form-control" th:field="*{customerId}"/>
 
-        <input type="hidden" th:field="*{customerId}"/>
-        <table class="table table-success" cellpadding="5">
-            <tr>
-                <th>Customer Code</th>
-                <td>
-                    <input type="text" th:field="*{customerCode}"/>
-                    <span style="color: red" th:if="${#fields.hasErrors('customerCode')}"
-                          th:errors="*{customerCode}"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Name</th>
-                <td>
-                    <input type="text" th:field="*{customerName}"/>
-                    <span style="color: red" th:if="${#fields.hasErrors('customerName')}"
-                          th:errors="*{customerName}"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Birthday</th>
-                <td>
-                    <input type="text" th:field="*{customerBirthday}"/>
-                    <span th:if="${#fields.hasErrors('customerBirthday')}" th:errors="*{customerBirthday}"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Gender</th>
-                <br>
-                <td>
-                    <div class="row">
-                        <div class="col-12">
-                            <select th:field="*{customerGender}">
-                                <option th:value="0" th:text="Male"></option>
-                                <option th:value="1" th:text="Female"></option>
-                            </select>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Id Card</th>
-                <td>
-                    <input type="number" th:field="*{customerIdCard}"/>
-                    <span style="color: red" th:if="${#fields.hasErrors('customerIdCard')}"
-                          th:errors="*{customerIdCard}"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Phone</th>
-                <td>
-                    <input type="number" th:field="*{customerPhone}"/>
-                    <span style="color: red" th:if="${#fields.hasErrors('customerPhone')}"
-                          th:errors="*{customerPhone}"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Email</th>
-                <td>
-                    <input type="text" th:field="*{customerMail}">
-                    <span style="color: red" th:if="${#fields.hasErrors('customerMail')}"
-                          th:errors="*{customerMail}"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Address</th>
-                <td>
-                    <input type="text" th:field="*{customerAddress}"/>
-                    <span style="color: red" th:if="${#fields.hasErrors('customerAddress')}"
-                          th:errors="*{customerAddress}"></span>
-                </td>
-            </tr>
-            <tr>
-                <th>Customer Type</th>
-                <td>
-                    <select th:field="*{customerType}">
-                        <option th:each="item:${customerTypeList}" th:value="${item.id}"
-                                th:text="${item.name}"></option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="submit" class="btn btn-success">Save</button>
-                </td>
-            </tr>
-        </table>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Customer Code: </label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name"
+                   th:field="*{customerCode}">
+            <span style="color: red" th:if="${#fields.hasErrors('customerCode')}"
+                  th:errors="*{customerCode}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail2" class="form-label">Customer Name: </label>
+            <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" name="name"
+                   th:field="*{customerName}">
+            <span style="color: red" th:if="${#fields.hasErrors('customerName')}"
+                  th:errors="*{customerName}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail3" class="form-label">Customer Birthday: </label>
+            <input type="date" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp" name="name"
+                   th:field="*{customerBirthday}">
+            <span style="color: red" th:if="${#fields.hasErrors('customerBirthday')}"
+                  th:errors="*{customerBirthday}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Customer Gender: </label>
+            <label>
+                <select class="form-control" th:field="*{customerGender}">
+                    <option th:value="0" th:text="Male"></option>
+                    <option th:value="1" th:text="Female"></option>
+                </select>
+            </label>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail4" class="form-label">Customer Id Card: </label>
+            <input type="text" class="form-control" id="exampleInputEmail4" aria-describedby="emailHelp" name="name"
+                   th:field="*{customerIdCard}">
+            <span style="color: red" th:if="${#fields.hasErrors('customerIdCard')}"
+                  th:errors="*{customerIdCard}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail5" class="form-label">Customer Phone: </label>
+            <input type="text" class="form-control" id="exampleInputEmail5" aria-describedby="emailHelp" name="name"
+                   th:field="*{customerPhone}">
+            <span style="color: red" th:if="${#fields.hasErrors('customerPhone')}"
+                  th:errors="*{customerPhone}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail6" class="form-label">Customer Email: </label>
+            <input type="text" class="form-control" id="exampleInputEmail6" aria-describedby="emailHelp" name="name"
+                   th:field="*{customerMail}">
+            <span style="color: red" th:if="${#fields.hasErrors('customerMail')}"
+                  th:errors="*{customerMail}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail7" class="form-label">Customer Address: </label>
+            <input type="text" class="form-control" id="exampleInputEmail7" aria-describedby="emailHelp" name="name"
+                   th:field="*{customerAddress}">
+            <span style="color: red" th:if="${#fields.hasErrors('customerAddress')}"
+                  th:errors="*{customerAddress}"></span>
+        </div>
+
+        <div>
+            <label>Customer Type: </label>
+            <select class="form-control" th:field="*{customerType}">
+                <option th:each="item:${customerTypeList}" th:text="${item.name}"
+                        th:value="${item.id}"></option>
+            </select>
+        </div>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-success">
+                Save
+            </button>
+        </div>
     </form>
 </div>
 
