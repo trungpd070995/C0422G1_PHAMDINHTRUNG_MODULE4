@@ -4,16 +4,43 @@ import com.case_study.model.customer.CustomerType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class CustomerDto  implements Validator {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
+public class CustomerDto  implements Validator {
     private Integer customerId;
+
+    @NotBlank
+    @Pattern(regexp = "^(KH)-[0-9]{4}$",
+            message = "Vui lòng nhập lại theo định dạng : KH-XXXX (X: 0-9)")
     private String customerCode;
+
+    @NotBlank
+    @Pattern(regexp = "([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$",
+            message = "Hãy viết hoa chữ cái đầu tiên của mỗi từ!")
     private String customerName;
+
     private String customerBirthday;
     private Integer customerGender;
+
+    @Pattern(regexp = "^([0-9]{9}|[0-9]{12})$",
+            message = "Vui lòng nhập lại theo định dạng: XXXXXXXXX or XXXXXXXXXXXX (X: 0-9)")
     private String customerIdCard;
+
+    @Pattern(regexp = "^(090|091|\\(84\\)\\+90|\\(84\\)\\+91)[0-9]{7}$",
+            message = "Vui lòng nhập lại theo định dạng: 090xxxxxxx or 091xxxxxxx " +
+                    "or (84)+90xxxxxxx or (84)+91xxxxxxx (x: 0-9)")
     private String customerPhone;
+
+    @NotBlank
+    @Pattern(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$",
+            message = "Vui lòng nhập lại theo định dạng: abc@gmail.com or abc@gmail.com.vn")
     private String customerMail;
+
+    @NotBlank
+    @Pattern(regexp = "([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$",
+            message = "Hãy viết hoa chữ cái đầu tiên của mỗi từ!")
+    
     private String customerAddress;
     private CustomerType customerType;
 

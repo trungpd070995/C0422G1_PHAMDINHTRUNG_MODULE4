@@ -19,8 +19,8 @@
 </div>
 
 <div>
-    <form class="m-auto w-50" th:action="@{/customer/save}" th:object="${customerDto}" method="POST"
-          novalidate="novalidate">
+    <form style="background-color: mediumseagreen; padding: 20px; border-radius: 10px" class="m-auto w-50"
+          th:action="@{/customer/save}" th:object="${customerDto}" method="POST" novalidate="novalidate">
 
         <input type="hidden" class="form-control" th:field="*{customerId}"/>
 
